@@ -1,0 +1,20 @@
+How to find column name into table in ClickHouse using Flask?”
+
+Used while trying to display the list of columns dynamically on the frontend after selecting a ClickHouse table.
+
+Start ingestion button gets disappeared from the frontend. How do I fix it?
+
+Prompted UI debugging and conditionally showing the ingestion button based on source selection.
+
+
+“I’m getting error: No columns selected for ingestion. Upload and preview working alright but on clicking Start Ingestion in flatfile gives this error.”
+
+Helped identify the issue that columns weren’t being rendered after uploading real data.
+
+“Before I gave dummy data which had only three columns, but now the real CSV has 10–12 columns which are not visible on clicking start ingestion.”
+
+Clarified the mismatch in frontend rendering and led to updating the column checkbox rendering logic.
+
+“Give me the full compiled HTML code.”
+
+Requested the complete working frontend layout integrating all backend-connected logic.
