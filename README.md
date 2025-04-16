@@ -39,3 +39,16 @@ Configure direcly with frontend inputs.
 TO run the backend app you must run:
 python app.py
 
+File structure will be:
+.
+├── app.py                  # Flask backend
+├── requirements.txt        # Dependencies
+├── templates/
+│   └── index.html          # Frontend UI
+├── static/
+│   ├── styles.css          # Styling
+│   └── script.js           # JavaScript logic
+├── uploaded_files/         # Temporary uploaded CSVs
+└── README.md
+
+
