@@ -1,0 +1,102 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Ingestion Tool</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .hidden {
+      display: none;
+    }
+    .container {
+      padding: 20px;
+    }
+    input, select, button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+    }
+    label {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bidirectional Ingestion Tool</h1>
+
+  <div class="container">
+    <!-- Source Selection -->
+    <div class="source-select">
+      <label for="source">Select Source:</label>
+      <select id="source">
+        <option value="">-- Select --</option>
+        <option value="clickhouse">ClickHouse</option>
+        <option value="flatfile">Flat File</option>
+      </select>
+    </div>
+
+    <!-- ClickHouse Configuration -->
+    <div id="clickhouse-config" class="config hidden">
+      <h3>ClickHouse Config</h3>
+      <input type="text" id="ch-host" placeholder="Host (e.g. localhost)">
+      <input type="text" id="ch-port" placeholder="Port (e.g. 8443)">
+      <input type="text" id="ch-db" placeholder="Database">
+      <input type="text" id="ch-user" placeholder="User">
+      <input type="password" id="ch-token" placeholder="JWT Token">
+      <button onclick="fetchTables()">Fetch Tables</button>
+      <label for="ch-table">Select Table:</label>
+      <select id="ch-table" onchange="fetchColumns()"></select>
+      <div id="ch-columns"></div>
+    </div>
+
+    <!-- Flat File Upload -->
+    <div id="flatfile-config" class="config hidden">
+      <h3>Flat File Upload</h3>
+      <input type="file" id="csv-file">
+      <button onclick="uploadFile()">Upload & Preview</button>
+    </div>
+
+    <!-- Ingestion Status -->
+    <button id="ingest-btn" onclick="startIngestion()">Start Ingestion</button>
+    <div id="status"></div>
+    <div id="preview"></div>
+  </div>
+
+  <script>
+    function showConfigSection(source) {
+  document.querySelectorAll(".config").forEach(el => el.classList.add("hidden"));
+  document.getElementById("ingest-btn").classList.add("hidden"); // Hide the button initially
+
+  if (source === "clickhouse") {
+    document.getElementById("clickhouse-config").classList.remove("hidden");
+  } else if (source === "flatfile") {
+    document.getElementById("flatfile-config").classList.remove("hidden");
+  }
+}
+
+// After selecting a table, fetch columns and ensure button visibility
+function fetchColumns() {
+  // Here, make sure you fetch the columns based on the selected table
+  // Simulate the data fetching
+  const table = document.getElementById("ch-table").value;
+
+  // Add a delay to simulate fetching the columns from the server
+  setTimeout(function() {
+    // Example of dynamically adding columns (you can replace this part with actual API call)
+    const columnsContainer = document.getElementById("ch-columns");
+    columnsContainer.innerHTML = "<p>Column 1, Column 2, Column 3</p>"; // Simulated columns
+
+    // Make sure to display the "Start Ingestion" button after columns are shown
+    document.getElementById("ingest-btn").classList.remove("hidden");
+  }, 1000);
+}
+
+document.getElementById("source").addEventListener("change", function () {
+  showConfigSection(this.value);
+});
+
+  </script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
